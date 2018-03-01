@@ -1,8 +1,9 @@
 <?php
 
-namespace Devfactorych\Macros;
+namespace Devfactory\Macros;
 
 use Illuminate\Support\ServiceProvider;
+use Form;
 
 class MacrosServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,11 @@ class MacrosServiceProvider extends ServiceProvider
       __DIR__ . '/config/macros.php' => config_path('macros.php'),
     ]);
 
-    $this->loadViewFrom(__DIR__ . '/views/macros', 'macros');
+    $this->publishes([
+      __DIR__ . '/views' => base_path('vendor/resources/views/devfactory'),
+    ]);
+
+    $this->loadViewsFrom(__DIR__ . '/views/macros', 'macros');
 
     /**
      *--------------------------------------------------------------------------
@@ -25,7 +30,8 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemText', function($name, $label, $value = NULL, $errors = NULL, $extras = array()) {
+    Form::component('itemText', 'macros::item_text', ['name', 'label', 'value' => NULL, 'attributes' => []]);
+    /*Form::macro('itemText', function($name, $label, $value = NULL, $errors = NULL, $extras = array()) {
       $default_extras = array(
         'disabled' => FALSE,
         'help' => '',
@@ -44,8 +50,8 @@ class MacrosServiceProvider extends ServiceProvider
 
       $help = $extras['help'];
 
-      return view('macros.item_text', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+      return view('macros::item_text', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
+    });*/
 
     /**
      *--------------------------------------------------------------------------
@@ -582,8 +588,6 @@ class MacrosServiceProvider extends ServiceProvider
    */
   public function register()
   {
-    $this->mergeConfigFrom(
-      __DIR__.'/path/to/config/courier.php', 'courier'
-    );
+
   }
 }

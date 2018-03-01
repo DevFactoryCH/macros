@@ -1,10 +1,9 @@
 <div class="form-group{{ (!is_null($errors) && $errors->has($name)) ? ' has-error' : '' }}">
-  {!! Form::label($name, $label, ['class' => 'col-sm-2 control-label']) !!}
-  <div class="col-sm-10">
-    {!! Form::text($name, $value, $attributes) !!}
-    @if (!empty($help))
-      <p class="help-block">{{ $help }}</p>
-    @endif
-    {!! (!is_null($errors) && $errors->has($name) ? '<p class="help-block text-red">' . $errors->first($name) . '</p>' : '') !!}
-  </div>
+  {{ Form::label($name, $label, ['class' => 'control-label']) }}
+  {{ Form::text($name, $value, array_merge(['class' => 'form-control'], $attributes)) }}
+  @if (!empty($help))
+    <small class="form-text text-muted">{{ $help }}</small>
+    <p class="help-block"></p>
+  @endif
+  {{ $errors->has($name) ? '<div class="invalid-feedback">' . $errors->first($name) . '</div>' : '' }}
 </div>
