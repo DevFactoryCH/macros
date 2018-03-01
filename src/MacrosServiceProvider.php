@@ -14,8 +14,10 @@ class MacrosServiceProvider extends ServiceProvider
   public function boot()
   {
     $this->publishes([
-      __DIR__.'config/macros.php' => config_path('macros.php'),
-    ], 'config');
+      __DIR__ . '/config/macros.php' => config_path('macros.php'),
+    ]);
+
+    $this->loadViewFrom(__DIR__ . '/views/macros', 'macros');
 
     /**
      *--------------------------------------------------------------------------
