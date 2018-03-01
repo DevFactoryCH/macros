@@ -19,7 +19,7 @@ class MacrosServiceProvider extends ServiceProvider
     ]);
 
     $this->publishes([
-      __DIR__ . '/views' => base_path('vendor/resources/views/devfactory'),
+      __DIR__ . '/views' => base_path('resources/views/vendor/'),
     ]);
 
     $this->loadViewsFrom(__DIR__ . '/views/macros', 'macros');
