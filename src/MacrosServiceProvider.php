@@ -31,27 +31,6 @@ class MacrosServiceProvider extends ServiceProvider
      *
      */
     Form::component('itemText', 'macros::item_text', ['name', 'label', 'value' => NULL, 'attributes' => []]);
-    /*Form::macro('itemText', function($name, $label, $value = NULL, $errors = NULL, $extras = array()) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'help' => '',
-        'class' => '',
-      );
-
-      $extras = array_merge($default_extras, $extras);
-
-      $attributes = array(
-        'class' => 'form-control '. $extras['class'],
-      );
-
-      if ($extras['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-
-      $help = $extras['help'];
-
-      return view('macros::item_text', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });*/
 
     /**
      *--------------------------------------------------------------------------
@@ -59,27 +38,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontText', function($name, $label, $value = NULL, $errors = NULL, $attributes = [], $help = NULL) {
-      $default_attributes = array(
-        'class' => ['form-control'],
-        'required' => NULL,
-      );
-
-      $class = $default_attributes['class'];
-      if (isset($attributes['class'])) {
-        $class = array_merge($default_attributes['class'], $attributes['class']);
-      }
-      $attributes = array_merge($default_attributes, $attributes);
-      $attributes['class'] = $class;
-
-      foreach ($attributes as &$attribute) {
-        if (is_array($attribute)) {
-          $attribute = implode(' ', $attribute);
-        }
-      }
-
-      return view('macros.front_text', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+    Form::component('frontText', 'macros::front_text', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -87,41 +46,15 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemTextarea', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = NULL) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-        'rows' => '3',
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = 'form-control '. $attributes['class'];
-
-      return view('macros.item_textarea', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
-
+    Form::component('itemTextarea', 'macros::item_textarea', ['name', 'label', 'value' => NULL, 'attributes' => []]);
+    
     /**
      *--------------------------------------------------------------------------
      * Handles the input for a single textarea field
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontTextarea', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = NULL) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-        'rows' => '3',
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes['class'] = 'form-control '. $attributes['class'];
-
-      return view('macros.front_textarea', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+    Form::component('frontTextarea', 'macros::front_textarea', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -129,20 +62,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemWysiwyg', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = NULL) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => 'summernote',
-        'required' => NULL,
-        'rows' => '3',
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes['class'] = 'form-control '. $attributes['class'];
-
-      return view('macros.item_wysiwyg', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+    Form::component('itemWysiwyg', 'macros::item_wysiwyg', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -150,27 +70,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemPassword', function($name, $label, $value = NULL, $errors = NULL, $extras = array()) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'help' => '',
-        'class' => '',
-      );
-
-      $extras = array_merge($default_extras, $extras);
-
-      $attributes = array(
-        'class' => 'form-control '. $extras['class'],
-      );
-
-      if ($extras['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-
-      $help = $extras['help'];
-
-      return view('macros.item_password', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+    Form::component('itemPassword', 'macros::item_password', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -178,27 +78,8 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontPassword', function($name, $label, $value = NULL, $errors = NULL, $extras = array()) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'help' => '',
-        'class' => '',
-      );
-
-      $extras = array_merge($default_extras, $extras);
-
-      $attributes = array(
-        'class' => 'form-control '. $extras['class'],
-      );
-
-      if ($extras['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-
-      $help = $extras['help'];
-
-      return view('macros.front_password', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
-    });
+    Form::component('frontPassword', 'macros::front_password', ['name', 'label', 'value' => NULL, 'attributes' => []]);
+    
 
     /**
      *--------------------------------------------------------------------------
@@ -206,19 +87,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemSelect', function($name, $label, $options, $value = NULL, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = 'form-control '. $attributes['class'];
-
-      return View::make('macros.item_select', compact('name', 'label', 'options', 'value', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('itemSelect', 'macros::item_select', ['name', 'label', 'options', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -226,19 +95,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontSelect', function($name, $label, $options, $value = NULL, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = 'form-control '. $attributes['class'];
-
-      return view('macros.front_select', compact('name', 'label', 'options', 'value', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('frontSelect', 'macros::front_select', ['name', 'label', 'options', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -246,19 +103,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemCheckbox', function($name, $label, $value = NULL, $checked, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes['class'] = $attributes['class'];
-
-      return view('macros.item_checkbox', compact('name', 'label', 'value', 'checked', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('itemCheckbox', 'macros::item_checkbox', ['name', 'label', 'value' => NULL, 'checked', 'attributes' => []]);
 
 
     /**
@@ -267,19 +112,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontCheckbox', function($name, $label, $value = NULL, $checked, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = $attributes['class'];
-
-      return view('macros.front_checkbox', compact('name', 'label', 'value', 'checked', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('frontCheckbox', 'macros::front_checkbox', ['name', 'label', 'value' => NULL, 'checked', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -287,17 +120,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemCheckboxBasic', function($name, $label, $value = NULL, $attributes = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      return view('macros.item_checkbox_basic', compact('name', 'label', 'value', 'attributes'))->render();
-    });
+    Form::component('itemCheckboxBasic', 'macros::item_checkbox_basic', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -305,19 +128,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontRadio', function($name, $label, $options, $checked, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = $attributes['class'];
-
-      return view('macros.front_radio', compact('name', 'label', 'options', 'value', 'checked', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('frontRadio', 'macros::front_radio', ['name', 'label', 'options', 'value', 'checked', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -325,19 +136,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemDate', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes['class'] = 'form-control date-picker '. $attributes['class'];
-
-      return view('macros.item_date', compact('name', 'label', 'value', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('itemDate', 'macros::item_date', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -345,19 +144,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontDate', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = 'form-control date-picker '. $attributes['class'];
-
-      return view('macros.front_date', compact('name', 'label', 'value', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('frontDate', 'macros::front_date', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -365,19 +152,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('frontTime', function($name, $label, $value = NULL, $errors = NULL, $attributes = array(), $help = array()) {
-      $default_attributes = array(
-        'disabled' => NULL,
-        'class' => '',
-        'required' => NULL,
-      );
-
-      $attributes = array_merge($default_attributes, $attributes);
-
-      $attributes ['class'] = 'form-control time-picker '. $attributes['class'];
-
-      return view('macros.front_time', compact('name', 'label', 'value', 'errors', 'attributes', 'help'))->render();
-    });
+    Form::component('frontTime', 'macros::front_time', ['name', 'label', 'value' => NULL, 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -385,23 +160,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('itemSubmit', function($label, $extras = array()) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => '',
-      );
-
-      $attributes = array_merge($default_extras, $extras);
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_submit', compact('label', 'attributes'))->render();
-    });
+    Form::component('itemSubmit', 'macros::item_date', ['label', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -409,31 +168,14 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('buttonDelete', function($url, $extras = []) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => 'btn-sm',
-      );
-
-      $id = last(explode('/', $url));
-
-      $attributes = array_merge($default_extras, $extras);
-
-      $attributes['class'] = 'btn btn-danger form-delete-button-submit '. $attributes['class'];
-      $attributes['data-url'] = $url;
-      $attributes['data-id'] = $id;
-      $attributes['data-toggle'] = 'modal';
-      $attributes['data-target'] = '#confirm-delete';
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_button_delete', compact('url', 'id', 'attributes'))->render();
-    });
+    Form::component('buttonDelete', 'macros::item_button_delete', ['url', 'id', 'attributes' => []]);
+    /**
+     *--------------------------------------------------------------------------
+     * Handles the input for a single text field
+     *--------------------------------------------------------------------------
+     *
+     */
+    Form::component('buttonCancel', 'macros::item_button_cancel', ['url', 'id', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -441,31 +183,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('buttonCancel', function($url, $extras = []) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => 'btn-sm',
-      );
-
-      $id = last(explode('/', $url));
-
-      $attributes = array_merge($default_extras, $extras);
-
-      $attributes['class'] = 'btn btn-warning form-cancel-button-submit '. $attributes['class'];
-      $attributes['data-url'] = $url;
-      $attributes['data-id'] = $id;
-      $attributes['data-toggle'] = 'modal';
-      $attributes['data-target'] = '#confirm-cancel';
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_button_cancel', compact('url', 'id', 'attributes'))->render();
-    });
+    Form::component('buttonEdit', 'macros::item_button_edit', ['url', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -473,25 +191,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('buttonEdit', function($url, $extras = []) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => 'btn-sm',
-      );
-
-      $attributes = array_merge($default_extras, $extras);
-
-      $attributes['class'] = 'btn btn-info '. $attributes['class'];
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_button_edit', compact('url', 'attributes'))->render();
-    });
+    Form::component('buttonGet', 'macros::item_button_get', ['url', 'label', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -499,51 +199,7 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('buttonGet', function($url, $label = 'general.edit', $extras = []) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => 'btn-info',
-      );
-
-      $attributes = array_merge($default_extras, $extras);
-
-      $attributes['class'] = 'btn '. $attributes['class'];
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_button_get', compact('url', 'label', 'attributes'))->render();
-    });
-
-    /**
-     *--------------------------------------------------------------------------
-     * Handles the input for a single text field
-     *--------------------------------------------------------------------------
-     *
-     */
-    Form::macro('buttonCreate', function($url, $extras = []) {
-      $default_extras = array(
-        'disabled' => FALSE,
-        'class' => '',
-      );
-
-      $attributes = array_merge($default_extras, $extras);
-
-      $attributes['class'] = 'btn btn-info '. $attributes['class'];
-
-      if ($attributes['disabled']) {
-        $attributes['disabled'] = 'disabled';
-      }
-      else {
-        unset($attributes['disabled']);
-      }
-
-      return view('macros.item_button_create', compact('url', 'attributes'))->render();
-    });
+    Form::component('buttonCreate', 'macros::item_button_create', ['url', 'label', 'attributes' => []]);
 
     /**
      *--------------------------------------------------------------------------
@@ -551,34 +207,14 @@ class MacrosServiceProvider extends ServiceProvider
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('singleUpload', function($name, $label, $model, $type) {
-      $file = NULL;
-      $model_name = '';
-
-      if (!is_null($model)) {
-        $file = $model->getMedia($type)->first();
-        $model_name = class_basename($model);
-        $image = Imagecache::get($file, '80x80');
-      }
-
-      return view('macros.single_upload', compact('name', 'image', 'label', 'file', 'model', 'model_name', 'type'));
-    });
-
+    Form::component('singleUpload', 'macros::single_upload', ['name', 'label', 'file']);
     /**
      *--------------------------------------------------------------------------
      * Handles the input for a multiple file upload using plupload
      *--------------------------------------------------------------------------
      *
      */
-    Form::macro('multiUpload', function($label, $model, $type) {
-      if (!$model) {
-        return;
-      }
-      $files = $model->getMedia($type);
-      $model_name = class_basename($model);
-
-      return view('macros.multi_upload', compact('label', 'files', 'model', 'model_name', 'type'));
-    });
+    Form::component('multiUpload', 'macros::multi_upload', ['label', 'files', 'type', 'model_name', 'model']);
   }
 
   /**
