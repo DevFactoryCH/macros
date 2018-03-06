@@ -34,7 +34,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name',
             'label', 
             'value' => NULL,
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL
         ]);
 
         /**
@@ -47,7 +48,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -60,7 +62,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
         
         /**
@@ -73,7 +76,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name',
             'label',
             'value' => NULL,
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -86,7 +90,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -99,7 +104,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -112,7 +118,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
         
 
@@ -127,7 +134,8 @@ class MacrosServiceProvider extends ServiceProvider
             'label', 
             'options', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -141,7 +149,8 @@ class MacrosServiceProvider extends ServiceProvider
             'label', 
             'options', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -155,7 +164,8 @@ class MacrosServiceProvider extends ServiceProvider
             'label', 
             'value' => NULL, 
             'checked', 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
 
@@ -170,7 +180,8 @@ class MacrosServiceProvider extends ServiceProvider
             'label', 
             'value' => NULL, 
             'checked', 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -183,7 +194,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -198,7 +210,7 @@ class MacrosServiceProvider extends ServiceProvider
             'options', 
             'value', 
             'checked', 
-            'attributes' => []
+            'attributes' => [],
         ]);
 
         /**
@@ -211,7 +223,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -224,7 +237,22 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
+        ]);
+
+        /**
+         *--------------------------------------------------------------------------
+         * Handles the input for a Time field
+         *--------------------------------------------------------------------------
+         *
+         */
+        Form::component('itemTime', 'macros::item_time', [
+            'name', 
+            'label', 
+            'value' => NULL, 
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -237,7 +265,8 @@ class MacrosServiceProvider extends ServiceProvider
             'name', 
             'label', 
             'value' => NULL, 
-            'attributes' => []
+            'attributes' => [],
+            'help' => NULL,
         ]);
 
         /**
@@ -248,6 +277,17 @@ class MacrosServiceProvider extends ServiceProvider
          */
         Form::component('itemSubmit', 'macros::item_date', [
             'label', 
+            'attributes' => []
+        ]);
+
+        /**
+         *--------------------------------------------------------------------------
+         * Handles the input for a single text field
+         *--------------------------------------------------------------------------
+         *
+         */
+        Form::component('buttonSubmit', 'macros::item_button_submit', [
+            'value',
             'attributes' => []
         ]);
 

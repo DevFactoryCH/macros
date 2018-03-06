@@ -1,19 +1,8 @@
-<div class="form-group{{ (!is_null($errors) && $errors->has($name)) ? ' has-error' : '' }}">
-
-  {!! Form::label($name, $label, ['class' => 'control-label']) !!}
-  <b>{!! $attributes['required'] ? ' <span class="text-danger">*</span>' : '' !!}</b>
-  @foreach ($options as $value => $text)
-    <div class="radio">
-      <label>
-        {!! Form::radio($name, $value, NULL, ['id' => 'optionsRadios'. $value]) !!}
-        {{ $text }}
-      </label>
-    </div>
-  @endforeach
-
+<div class="form-check">
+  {{ Form::radio($name, $value, $checked, array_merge(['class' => 'form-check-input'], $attributes)) }}
+  {{ Form::label($name, $label, ['class' => 'form-check-label']) }}
   @if (!empty($help))
-    <p class="help-block">{{ $help }}</p>
+    <small class="form-text text-muted">{{ $help }}</small>
   @endif
-  {!! (!is_null($errors) && $errors->has($name) ? '<p class="help-block text-red">' . $errors->first($name) . '</p>' : '') !!}
-
+  {!! $errors->has($name) ? '<span class="text-danger">' . $errors->first($name) . '</span>' : '' !!}
 </div>
