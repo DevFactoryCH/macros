@@ -4,5 +4,7 @@
   @if (!empty($help))
     <small class="form-text text-muted">{{ $help }}</small>
   @endif
-  {!! $errors->has($name) ? '<span class="text-danger">' . $errors->first($name) . '</span>' : '' !!}
+  @if (!is_null($errors) && $errors->has($name))
+    <div class="invalid-feedback">{{ $errors->first($name) }}</div>
+  @endif
 </div>

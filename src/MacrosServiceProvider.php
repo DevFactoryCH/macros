@@ -155,8 +155,11 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
             $attributes['class'] = 'form-control ' . $attributes['class'];
+
+            if (!is_null($errors) && $errors->has($name)) {
+                $attributes['class'] = $attributes['class'] . ' is-invalid';
+            }
 
             return view('macros::item_wysiwyg', compact('name', 'label', 'value', 'errors', 'help', 'attributes'));
         });
@@ -177,8 +180,12 @@ class MacrosServiceProvider extends ServiceProvider
             $extras = array_merge($default_extras, $extras);
 
             $attributes = [
-                'class' => 'form-control '. $extras['class'],
+                'class' => 'form-control ' . $extras['class'],
             ];
+
+            if (!is_null($errors) && $errors->has($name)) {
+                $attributes['class'] = $attributes['class'] . ' is-invalid';
+            }
 
             if ($extras['disabled']) {
                 $attributes['disabled'] = 'disabled';
@@ -208,6 +215,10 @@ class MacrosServiceProvider extends ServiceProvider
                 'class' => 'form-control '. $extras['class'],
             ];
 
+            if (!is_null($errors) && $errors->has($name)) {
+                $attributes['class'] = $attributes['class'] . ' is-invalid';
+            }
+
             if ($extras['disabled']) {
                 $attributes['disabled'] = 'disabled';
             }
@@ -232,8 +243,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
-            $attributes['class'] = 'form-control '. $attributes['class'];
+            $attributes['class'] = 'form-control ' . $attributes['class'];
 
             return view('macros::item_select', compact('name', 'label', 'options', 'value', 'errors', 'attributes', 'help'));
         });
@@ -252,7 +262,6 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
             $attributes['class'] = 'form-control ' . $attributes['class'];
 
             return view('macros::front_select', compact('name', 'label', 'options', 'value', 'errors', 'attributes', 'help'));
@@ -272,10 +281,9 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
             $attributes['class'] = $attributes['class'];
 
-            return view('macros.item_checkbox', compact('name', 'label', 'value', 'checked', 'errors', 'attributes', 'help'));
+            return view('macros::item_checkbox', compact('name', 'label', 'value', 'checked', 'errors', 'attributes', 'help'));
         });
 
 
@@ -293,7 +301,6 @@ class MacrosServiceProvider extends ServiceProvider
             ];
             
             $attributes = array_merge($default_attributes, $attributes);
-
             $attributes['class'] = $attributes['class'];
 
             return view('macros::front_checkbox', compact('name', 'label', 'value', 'checked', 'errors', 'attributes', 'help'));
@@ -333,8 +340,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
-            $attributes ['class'] = $attributes['class'];
+            $attributes['class'] = $attributes['class'];
 
             return view('macros::front_radio', compact('name', 'label', 'options', 'value', 'checked', 'errors', 'attributes', 'help'));
         });
@@ -353,8 +359,11 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
+            $attributes['class'] = 'form-control '. $attributes['class'];
 
-            $attributes['class'] = 'form-control date-picker '. $attributes['class'];
+            if (!is_null($errors) && $errors->has($name)) {
+                $attributes['class'] = $attributes['class'] . ' is-invalid';
+            }
 
             return view('macros::item_date', compact('name', 'label', 'value', 'errors', 'attributes', 'help'));
         });
@@ -373,8 +382,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
-            $attributes['class'] = 'form-control date-picker '. $attributes['class'];
+            $attributes['class'] = 'form-control ' . $attributes['class'];
 
             return view('macros::front_date', compact('name', 'label', 'value', 'errors', 'attributes', 'help'));
         });
@@ -393,8 +401,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
-            $attributes['class'] = 'form-control time-picker '. $attributes['class'];
+            $attributes['class'] = 'form-control ' . $attributes['class'];
 
             return view('macros::front_time', compact('name', 'label', 'value', 'errors', 'attributes', 'help'));
         });
@@ -413,8 +420,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_attributes, $attributes);
-
-            $attributes['class'] = 'form-control time-picker '. $attributes['class'];
+            $attributes['class'] = 'form-control ' . $attributes['class'];
 
             return view('macros.front_time', compact('name', 'label', 'value', 'errors', 'attributes', 'help'));
         });
@@ -440,39 +446,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_submit', compact('label', 'attributes'));
-        });
-
-        /**
-         *--------------------------------------------------------------------------
-         * Handles the input for a single text field
-         *--------------------------------------------------------------------------
-         *
-         */
-        Form::macro('buttonSubmit', function($url, $extras = []) {
-            $default_extras = [
-                'disabled' => FALSE,
-                'class' => 'btn-sm',
-            ];
-
-            $id = last(explode('/', $url));
-
-            $attributes = array_merge($default_extras, $extras);
-
-            $attributes['class'] = 'btn btn-danger form-delete-button-submit '. $attributes['class'];
-            $attributes['data-url'] = $url;
-            $attributes['data-id'] = $id;
-            $attributes['data-toggle'] = 'modal';
-            $attributes['data-target'] = '#confirm-delete';
-
-            if ($attributes['disabled']) {
-                $attributes['disabled'] = 'disabled';
-            }
-            else {
-                unset($attributes['disabled']);
-            }
-
-            return view('macros.item_button_delete', compact('url', 'id', 'attributes'));
+            return view('macros::item_submit', compact('label', 'attributes'));
         });
 
         /**
@@ -490,12 +464,7 @@ class MacrosServiceProvider extends ServiceProvider
             $id = last(explode('/', $url));
 
             $attributes = array_merge($default_extras, $extras);
-
-            $attributes['class'] = 'btn btn-danger form-delete-button-submit '. $attributes['class'];
-            $attributes['data-url'] = $url;
-            $attributes['data-id'] = $id;
-            $attributes['data-toggle'] = 'modal';
-            $attributes['data-target'] = '#confirm-delete';
+            $attributes['class'] = 'btn btn-danger ' . $attributes['class'];
 
             if ($attributes['disabled']) {
                 $attributes['disabled'] = 'disabled';
@@ -504,7 +473,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_button_delete', compact('url', 'id', 'attributes'));
+            return view('macros::item_button_delete', compact('url', 'id', 'attributes'));
         });
         
         /**
@@ -523,11 +492,7 @@ class MacrosServiceProvider extends ServiceProvider
 
             $attributes = array_merge($default_extras, $extras);
 
-            $attributes['class'] = 'btn btn-warning form-cancel-button-submit '. $attributes['class'];
-            $attributes['data-url'] = $url;
-            $attributes['data-id'] = $id;
-            $attributes['data-toggle'] = 'modal';
-            $attributes['data-target'] = '#confirm-cancel';
+            $attributes['class'] = 'btn btn-warning '. $attributes['class'];
 
             if ($attributes['disabled']) {
                 $attributes['disabled'] = 'disabled';
@@ -536,7 +501,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_button_cancel', compact('url', 'id', 'attributes'));
+            return view('macros::item_button_cancel', compact('url', 'id', 'attributes'));
         });
 
         /**
@@ -562,7 +527,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_button_edit', compact('url', 'attributes'));
+            return view('macros::item_button_edit', compact('url', 'attributes'));
         });
 
         /**
@@ -578,8 +543,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_extras, $extras);
-
-            $attributes['class'] = 'btn '. $attributes['class'];
+            $attributes['class'] = 'btn ' . $attributes['class'];
 
             if ($attributes['disabled']) {
                 $attributes['disabled'] = 'disabled';
@@ -588,7 +552,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_button_get', compact('url', 'label', 'attributes'));
+            return view('macros::item_button_get', compact('url', 'label', 'attributes'));
         });
 
         /**
@@ -604,8 +568,7 @@ class MacrosServiceProvider extends ServiceProvider
             ];
 
             $attributes = array_merge($default_extras, $extras);
-
-            $attributes['class'] = 'btn btn-info '. $attributes['class'];
+            $attributes['class'] = 'btn btn-info ' . $attributes['class'];
 
             if ($attributes['disabled']) {
                 $attributes['disabled'] = 'disabled';
@@ -614,7 +577,7 @@ class MacrosServiceProvider extends ServiceProvider
                 unset($attributes['disabled']);
             }
 
-            return view('macros.item_button_create', compact('url', 'attributes'));
+            return view('macros::item_button_create', compact('url', 'attributes'));
         });
 
         /**
