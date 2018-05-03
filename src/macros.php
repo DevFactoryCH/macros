@@ -428,18 +428,25 @@ Form::macro('itemSubmit', function($label, $extras = []) {
  *--------------------------------------------------------------------------
  *
  */
-Form::macro('buttonDelete', function($url, $extras = []) {
-  $default_extras = array(
+Form::macro('buttonDelete', function($url, $attributes = [], $options = []) {
+  $default_attributes = [
     'disabled' => FALSE,
     'class' => 'btn-sm',
+    'type' => 'submit',
+  ];
+
+  $default_options = [
     'theme' => 'btn-danger',
-  );
+    'icon' => '',
+    'text' => trans('general.delete'),
+  ];
+
+  $attributes = array_merge($default_attributes, $attributes);
+  $options = array_merge($default_options, $options);
 
   $id = last(explode('/', $url));
 
-  $attributes = array_merge($default_extras, $extras);
-
-  $attributes['class'] = 'btn '. $attributes['theme'] .' form-delete-button-submit '. $attributes['class'];
+  $attributes['class'] = 'btn '. $options['theme'] .' form-delete-button-submit '. $attributes['class'];
   $attributes['data-url'] = $url;
   $attributes['data-id'] = $id;
   $attributes['data-toggle'] = 'modal';
@@ -452,7 +459,14 @@ Form::macro('buttonDelete', function($url, $extras = []) {
     unset($attributes['disabled']);
   }
 
-  return view('macros::item_button_delete', compact('url', 'id', 'attributes'))->render();
+  $icon = '';
+  if (!empty($options['icon'])) {
+    $icon = '<i class="'. $options['icon'] .'"></i>';
+  }
+
+  $text = $icon .'&nbsp;'. $options['text'];
+
+  return view('macros::item_button_delete', compact('url', 'text', 'id', 'attributes'))->render();
 });
 
 /**
@@ -461,18 +475,25 @@ Form::macro('buttonDelete', function($url, $extras = []) {
  *--------------------------------------------------------------------------
  *
  */
-Form::macro('buttonCancel', function($url, $extras = []) {
-  $default_extras = [
+Form::macro('buttonCancel', function($url, $attributes = [], $options = []) {
+  $default_attributes = [
     'disabled' => FALSE,
     'class' => 'btn-sm',
-    'theme' => 'btn-warning',
+    'type' => 'submit',
   ];
+
+  $default_options = [
+    'theme' => 'btn-warning',
+    'icon' => '',
+    'text' => trans('general.cancel'),
+  ];
+
+  $attributes = array_merge($default_attributes, $attributes);
+  $options = array_merge($default_options, $options);
 
   $id = last(explode('/', $url));
 
-  $attributes = array_merge($default_extras, $extras);
-
-  $attributes['class'] = 'btn '. $attributes['theme'] .' '. $attributes['class'];
+  $attributes['class'] = 'btn '. $options['theme'] .' '. $attributes['class'];
 
   if ($attributes['disabled']) {
     $attributes['disabled'] = 'disabled';
@@ -481,7 +502,14 @@ Form::macro('buttonCancel', function($url, $extras = []) {
     unset($attributes['disabled']);
   }
 
-  return view('macros::item_button_cancel', compact('url', 'id', 'attributes'));
+  $icon = '';
+  if (!empty($options['icon'])) {
+    $icon = '<i class="'. $options['icon'] .'"></i>';
+  }
+
+  $text = $icon .'&nbsp;'. $options['text'];
+
+  return view('macros::item_button_cancel', compact('url', 'text', 'id', 'attributes'));
 });
 
 /**
@@ -490,16 +518,23 @@ Form::macro('buttonCancel', function($url, $extras = []) {
  *--------------------------------------------------------------------------
  *
  */
-Form::macro('buttonEdit', function($url, $extras = []) {
-  $default_extras = [
+Form::macro('buttonEdit', function($url, $attributes = [], $options = []) {
+  $default_attributes = [
     'disabled' => FALSE,
     'class' => 'btn-sm',
-    'theme' => 'btn-info',
+    'type' => 'submit',
   ];
 
-  $attributes = array_merge($default_extras, $extras);
+  $default_options = [
+    'theme' => 'btn-info',
+    'icon' => '',
+    'text' => trans('general.edit'),
+  ];
 
-  $attributes['class'] = 'btn '. $attributes['theme'] .' '. $attributes['class'];
+  $attributes = array_merge($default_attributes, $attributes);
+  $options = array_merge($default_options, $options);
+
+  $attributes['class'] = 'btn '. $options['theme'] .' '. $attributes['class'];
 
   if ($attributes['disabled']) {
     $attributes['disabled'] = 'disabled';
@@ -508,7 +543,14 @@ Form::macro('buttonEdit', function($url, $extras = []) {
     unset($attributes['disabled']);
   }
 
-  return view('macros::item_button_edit', compact('url', 'attributes'));
+  $icon = '';
+  if (!empty($options['icon'])) {
+    $icon = '<i class="'. $options['icon'] .'"></i>';
+  }
+
+  $text = $icon .'&nbsp;'. $options['text'];
+
+  return view('macros::item_button_edit', compact('url', 'text', 'attributes'));
 });
 
 /**
@@ -517,15 +559,22 @@ Form::macro('buttonEdit', function($url, $extras = []) {
  *--------------------------------------------------------------------------
  *
  */
-Form::macro('buttonGet', function($url, $label = 'general.edit', $extras = []) {
-  $default_extras = [
+Form::macro('buttonGet', function($url, $label, $attributes = [], $options = []) {
+  $default_attributes = [
     'disabled' => FALSE,
     'class' => '',
-    'theme' => 'btn-info',
+    'type' => 'submit',
   ];
 
-  $attributes = array_merge($default_extras, $extras);
-  $attributes['class'] = 'btn '. $attributes['theme'] .' '. $attributes['class'];
+  $default_options = [
+    'theme' => 'btn-info',
+    'icon' => 'mdi mdi-plus-circle',
+  ];
+
+  $attributes = array_merge($default_attributes, $attributes);
+  $options = array_merge($default_options, $options);
+
+  $attributes['class'] = 'btn '. $options['theme'] .' '. $attributes['class'];
 
   if ($attributes['disabled']) {
     $attributes['disabled'] = 'disabled';
@@ -533,6 +582,13 @@ Form::macro('buttonGet', function($url, $label = 'general.edit', $extras = []) {
   else {
     unset($attributes['disabled']);
   }
+
+  $icon = '';
+  if (!empty($options['icon'])) {
+    $icon = '<i class="'. $options['icon'] .'"></i>';
+  }
+
+  $label = $icon .'&nbsp;'. $label;
 
   return view('macros::item_button_get', compact('url', 'label', 'attributes'));
 });
@@ -543,15 +599,23 @@ Form::macro('buttonGet', function($url, $label = 'general.edit', $extras = []) {
  *--------------------------------------------------------------------------
  *
  */
-Form::macro('buttonCreate', function($url, $extras = []) {
-  $default_extras = [
+Form::macro('buttonCreate', function($url, $attributes = [], $options = []) {
+  $default_attributes = [
     'disabled' => FALSE,
     'class' => '',
-    'theme' => 'btn-info',
+    'type' => 'submit',
   ];
 
-  $attributes = array_merge($default_extras, $extras);
-  $attributes['class'] = 'btn '. $attributes['theme'] .' '. $attributes['class'];
+  $default_options = [
+    'theme' => 'btn-info',
+    'icon' => 'mdi mdi-plus-circle',
+    'text' => trans('general.create'),
+  ];
+
+  $attributes = array_merge($default_attributes, $attributes);
+  $options = array_merge($default_options, $options);
+
+  $attributes['class'] = 'btn '. $options['theme'] .' '. $attributes['class'];
 
   if ($attributes['disabled']) {
     $attributes['disabled'] = 'disabled';
@@ -560,7 +624,14 @@ Form::macro('buttonCreate', function($url, $extras = []) {
     unset($attributes['disabled']);
   }
 
-  return view('macros::item_button_create', compact('url', 'attributes'));
+  $icon = '';
+  if (!empty($options['icon'])) {
+    $icon = '<i class="'. $options['icon'] .'"></i>';
+  }
+
+  $text = $icon .'&nbsp;'. $options['text'];
+
+  return view('macros::item_button_create', compact('text', 'url', 'attributes'));
 });
 
 /**

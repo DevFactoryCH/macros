@@ -1,5 +1,3 @@
-<div class="btn-group">
-  {{ Form::open(['method' => 'GET', 'url' => $url]) }}
-  {{ Form::submit(trans('general.create'), $attributes) }}
-  {{ Form::close() }}
-</div>
+{{ Form::open(['method' => 'GET', 'url' => $url]) }}
+{{ Form::button($text, $attributes) }}
+{{ Form::close() }}
