@@ -332,7 +332,7 @@ Form::macro('itemDate', function($name, $label, $value = NULL, $errors = NULL, $
   ];
 
   $attributes = array_merge($default_attributes, $attributes);
-  $attributes['class'] = 'form-control '. $attributes['class'];
+  $attributes['class'] = 'form-control datepicker '. $attributes['class'];
 
   if (!is_null($errors) && $errors->has($name)) {
     $attributes['class'] = $attributes['class'] . ' is-invalid';

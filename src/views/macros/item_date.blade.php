@@ -1,6 +1,6 @@
 <div class="form-group">
   {{ Form::label($name, $label, ['class' => 'control-label']) }}
-  {{ Form::date($name, $value, $attributes) }}
+  {{ Form::text($name, $value, $attributes) }}
   @if (!empty($help))
     <small class="form-text text-muted">{{ $help }}</small>
   @endif
