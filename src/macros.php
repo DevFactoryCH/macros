@@ -329,6 +329,7 @@ Form::macro('itemDate', function($name, $label, $value = NULL, $errors = NULL, $
     'disabled' => NULL,
     'class' => '',
     'required' => NULL,
+    'autocomplete' => 'off',
   ];
 
   $attributes = array_merge($default_attributes, $attributes);
