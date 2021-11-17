@@ -3,7 +3,6 @@
 namespace Devfactory\Macros;
 
 use Illuminate\Support\ServiceProvider;
-use Form;
 
 class MacrosServiceProvider extends ServiceProvider
 {
