@@ -453,8 +453,17 @@ Form::macro('buttonDelete', function ($url, $attributes = [], $options = []) {
     $attributes['class'] = 'btn ' . $options['theme'] . ' form-delete-button-submit ' . $attributes['class'];
     $attributes['data-url'] = $url;
     $attributes['data-id'] = $id;
-    $attributes['data-toggle'] = 'modal';
-    $attributes['data-target'] = '#confirm-delete';
+
+    $data_toggle = 'data-toggle';
+    $data_target = 'data-target';
+
+    if (config('macros.bootstrap_5')) {
+        $data_toggle = 'data-bs-toggle';
+        $data_target = 'data-bs-target';
+    }
+
+    $attributes[$data_toggle] = 'modal';
+    $attributes[$data_target] = '#confirm-delete';
 
     if ($attributes['disabled']) {
         $attributes['disabled'] = 'disabled';
